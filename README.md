@@ -1,3 +1,3 @@
 # Motion-Tracking-Base
 A device, one that can mount several different attachments including but not limited to fans, heaters, laptops, desktops, monitors, cameras, uses motion tracking technology to follow people or objects that are constantly moving. This invention increases ease of access and improves the efficiency of certain devices. By utilizing motion tracking technology, this device can make everyday life simpler. The objective of the invention is to remove the inconvenience of manually adjusting or moving a device, such as a camera of fan, when moving around in a room.
-Project created by Haroon Sheikh, Tyler Tran, Derek Lee.
+Project created by Haroon Sheikh, Tyler Tran, and Derek Lee.
