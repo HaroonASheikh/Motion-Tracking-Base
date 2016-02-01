@@ -1,0 +1,39 @@
+Code 2:
+#include <Stepper.h>
+const int stepsPerRevolution = 64;     // change this to fit the number of steps per revolution
+int Steps2Take = 0;
+int a = 0;
+int b = 0;
+int c = 0;
+int pirLeft = 2; //pin connected to PIR left
+int pirMid = 3; //pin connected to PIR middle
+int pirRight = 4; //pin connected to PIR right
+Stepper small_stepper(stepsPerRevolution, 8, 10, 9, 11);
+void setup()
+{  
+  pinMode(pirLeft, INPUT);
+  pinMode(pirMid, INPUT);
+  pinMode(pirRight, INPUT);
+}
+void loop()  
+{
+  a = digitalRead(pirLeft);
+  b = digitalRead(pirMid);
+  c = digitalRead(pirRight);
+  small_stepper.setSpeed(400);
+if (a == HIGH || b == HIGH || c == HIGH) {
+ 
+if (b == HIGH){
+   Steps2Take  = 0;                  
+   small_stepper.step(Steps2Take);
+}
+else if (a == HIGH){
+  Steps2Take  = 5;                  
+  small_stepper.step(Steps2Take);
+}  
+ else if (c == HIGH){
+   Steps2Take  = -5;                  
+   small_stepper.step(Steps2Take);
+}
+}
+}
