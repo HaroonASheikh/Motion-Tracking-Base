@@ -1,0 +1,46 @@
+Servo Code:
+#include <Servo.h>
+boolean pirStatus;
+Servo Hitec;
+int servangle = 0;
+int pirNo[] = {3,4,5,6};    
+int pirPrevLow[] = {1,1,1,1};    
+int pirPrevUsed[]  = {0,0,0,0};  
+int pirPos[] = {10,60,100,140;}
+int curPosPir = 0;
+int pirPin = 3;  
+int ledPin = 13;
+void setup(){
+  Serial.begin(9600);
+  Hitec.attach(9);
+  for(int i=0;i<4;i++){
+  pinMode(pirNo[i], INPUT);
+   }
+  pinMode(ledPin, OUTPUT);
+  delay(1000); // calibration period
+  //  Hitec.write(90); //
+  }
+void loop(){
+  for(int j=0;j<4;j++){ // for each PIR
+     pirPin=pirNo[j];
+     pirStatus = digitalRead(pirPin);
+     if (pirStatus == HIGH) {
+          digitalWrite(ledPin, HIGH);   //the led visualizes the sensors output pin state
+          if(pirPrevLow[j])    {
+                if (curPosPir != pirPin && pirPrevUsed[j] == 0) { // if high PIR is different than current position PIR then move to new position
+                   Hitec.write(pirPos[j]);
+                   Serial.println(j);
+                   delay(50);
+                   curPosPir = pirPin; // keep current PIR
+                   pirPrevUsed[j] = 1;
+                }
+          pirPrevLow[j] = 0; // pir is now not low
+          }
+      }
+      else {
+              digitalWrite(ledPin, LOW);  //the led visualizes the sensors output pin state
+              pirPrevLow[j] = 1;   // pir is now low
+              pirPrevUsed[j] = 0;
+      }
+    }
+  }
